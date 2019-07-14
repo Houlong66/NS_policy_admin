@@ -1,16 +1,78 @@
 <template>
   <div>
-    关系管理
+    <div class="relationlist-container">
+      <div>
+        <!-- 搜索栏 -->
+        <el-row type="flex" justify="end">
+          <el-col :span="10" style="text-align:end">
+            <el-button type="primary" @click="handleCreate({})">新建关系</el-button>
+          </el-col>
+        </el-row>
+
+        <div style="height:20px;"></div>
+
+        <!-- 表格栏 -->
+        <div class="table-container">
+          <cm-table :list="list" :total="total" :options="options" :pagination="pagination" :columns="columns"
+            :operates="operates" @handleSizeChange="handleSizeChange" @handleIndexChange="handleIndexChange"></cm-table>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
+import table from './table'
 export default {
-  name: 'RelationList'
+  name: 'RelationList',
+  data() {
+    return {
+      formData: {}, // 选中的数据，空对象则为新建
+      list: [],
+      columns: table.columns,
+      operates: table.operates,
+      total: 0,
+      pagination: table.pagination,
+      options: table.options
+    }
+  },
+  created() {
+    this.initData()
+  },
+  methods: {
+    // 初始化数据
+    initData() {
+
+    },
+    // 切换每页显示的数量
+    handleSizeChange(pagination) {
+      this.pagination = pagination
+      this.initData()
+    },
+    // 切换页码
+    handleIndexChange(pagination) {
+      this.pagination = pagination
+      this.initData()
+    },
+    // 编辑
+    handleCreate(item) {
+      this.formData = item
+      this.showCreate = true
+    },
+    // 删除
+    handleDelete(item) {
+      this.$confirm('确定删除该关系吗？','提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+      }).catch()
+    },
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 
 </style>
-
