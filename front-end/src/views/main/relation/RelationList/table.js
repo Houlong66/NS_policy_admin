@@ -1,12 +1,22 @@
 const columns = [
   {
-    prop: '',
-    label: '类型',
+    prop: 'company_id',
+    label: '企业id',
     align: 'center'
   },
   {
-    prop: '',
-    label: '关键词',
+    prop: 'guide_id',
+    label: '政策id',
+    align: 'center'
+  },
+  {
+    prop: 'matching',
+    label: '匹配度',
+    align: 'center'
+  },
+  {
+    prop: 'reason',
+    label: '匹配内容',
     align: 'center'
   },
 ] // 需要展示的列
