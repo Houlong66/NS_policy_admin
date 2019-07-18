@@ -7,6 +7,8 @@ from apis.base import CustomJSONEncoder
 
 from read_config import ConfigLoader
 
+import pymongo
+
 config = ConfigLoader()
 
 app = Flask(__name__)

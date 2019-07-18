@@ -19,13 +19,19 @@
       </div>
     </div>
 
+    <create-relation :show.sync="showCreate" :formData="formData" :list="list" :isEdit="isEdit" @afterCreate="initData"></create-relation>
+
   </div>
 </template>
 
 <script>
 import table from './table'
+import CreateRelation from './CreateRelation'
 export default {
   name: 'RelationList',
+  components: {
+    CreateRelation
+  },
   data() {
     return {
       formData: {}, // 选中的数据，空对象则为新建
@@ -34,7 +40,9 @@ export default {
       operates: table.operates,
       total: 0,
       pagination: table.pagination,
-      options: table.options
+      options: table.options,
+      showCreate: false,
+      isEdit: false
     }
   },
   created() {
@@ -69,17 +77,27 @@ export default {
     },
     // 编辑
     handleCreate(item) {
+      this.isEdit = JSON.stringify(item) !== '{}'
       this.formData = item
       this.showCreate = true
     },
     // 删除
-    handleDelete(item) {
-      this.$confirm('确定删除该关系吗？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-      }).catch()
+    async handleDelete(item) {
+      try {
+        await this.$confirm('确定删除该关系吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+        const resources = [{name: 'relations', id: item['_id']}]
+        const method = 'delete'
+        const options = {resources, method}
+        let res = await this.api.restful(options)
+        if (res.code === 200) {
+          this.$message.success('删除成功！')
+          this.initData()
+        }
+      } catch(e) {console.log(e)}
     },
   }
 }

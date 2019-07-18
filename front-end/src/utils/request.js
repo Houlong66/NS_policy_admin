@@ -8,6 +8,16 @@ const request = axios.create({
   timeout: 10000 // 请求超时
 })
 
+request.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+request.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded'
+request.defaults.transformRequest = [function (data) {
+  let ret = ''
+  for (let it in data) {
+    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+  }
+  return ret
+}]
+
 request.interceptors.request.use(
   config => {
     // 这里可以添加一些自定义的config设置，如token

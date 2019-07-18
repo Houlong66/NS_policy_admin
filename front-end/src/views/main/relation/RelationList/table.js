@@ -1,22 +1,25 @@
 const columns = [
   {
-    prop: 'company_id',
-    label: '企业id',
+    prop: 'type',
+    label: '类型',
     align: 'center'
   },
   {
-    prop: 'guide_id',
-    label: '政策id',
+    prop: 'word',
+    label: '关键词',
+    align: 'center',
+    formatter: ({row, column}) => {
+      return row.word.join(',')
+    }
+  },
+  {
+    prop: 'relation',
+    label: '关系',
     align: 'center'
   },
   {
-    prop: 'matching',
-    label: '匹配度',
-    align: 'center'
-  },
-  {
-    prop: 'reason',
-    label: '匹配内容',
+    prop: 'priority',
+    label: '优先级',
     align: 'center'
   },
 ] // 需要展示的列
