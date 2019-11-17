@@ -8,7 +8,7 @@
             <el-button v-if="node.level!==3" type="text" size="mini" @click="()=>append(data, node)">
               新增子行业
             </el-button>
-            <el-button type="text" size="mini" @click="()=>modify(data, node)">
+            <el-button v-if="node.level!==1" type="text" size="mini" @click="()=>modify(data, node)">
               修改
             </el-button>
             <el-button v-if="node.level!==1" type="text" size="mini" @click="()=>remove(data, node)">
