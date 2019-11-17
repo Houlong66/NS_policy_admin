@@ -38,6 +38,24 @@ const routes = [{
   }]
 },
 {
+  path: '/industry',
+  component: _import('layout/index'),
+  meta: {
+    requireAuth: true
+  },
+  children: [{
+    path: 'industrylist',
+    name: 'IndustryList',
+    meta: {
+      routeText: '行业管理',
+      routeIcon: 'el-icon-location',
+      showSideBar: true,
+      keepAlive: true
+    },
+    component: _import('main/industry/IndustryList/index')
+  }]
+},
+{
   path: '/dict',
   component: _import('layout/index'),
   meta: {

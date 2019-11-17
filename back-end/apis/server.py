@@ -22,6 +22,8 @@ mongo = PyMongo(app)
 
 from apis.relation import relation_server
 from apis.rule import rule_server
+from apis.industry import industry_server
 
-app.register_blueprint(relation_server, url_prefix="/api/")
-app.register_blueprint(rule_server, url_prefix="/api/")
+app.register_blueprint(relation_server, url_prefix="/api")
+app.register_blueprint(rule_server, url_prefix="/api")
+app.register_blueprint(industry_server, url_prefix="/api")

@@ -16,7 +16,7 @@ let native = () => {
     mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), // 是否为移动终端
     ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), // IOS终端
     android: u.indexOf('Android') > -1, // 安卓终端
-    iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, // 是否为iphone或QQHD浏览器
+    iPhone: u.indexOf('iPhone') > -1, // 是否为iphone或QQHD浏览器
     iPad: u.indexOf('iPad') > -1, // 是否为iPad
     webApp: u.indexOf('Safari') == -1, // 是否web应用程序，没有头部与底部
     QQbrw: u.indexOf('MQQBrowser') > -1, // QQ浏览器
